@@ -7,4 +7,4 @@ No, it's not in canvas. No, it doesn't have a game loop. Yes, I know it's not pe
 All images come from [Rpg Maker VX Resource planet](http://vxresource.wordpress.com/)
 All sounds come from [OpenGameArt.org](http://opengameart.org/)
 
-![Game screenshot](/game-preview.png)
+![Game screenshot](http://kaaes.github.com/simple-dom-game/game-preview.png)
