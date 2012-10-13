@@ -191,7 +191,7 @@ Game.prototype.movePlayerTo = function(player, x, y) {
       }
 
     } else {
-      //player.health -= this.moveEnergy;
+      player.health -= this.moveEnergy;
       player.move(x, y);
     }
   }
