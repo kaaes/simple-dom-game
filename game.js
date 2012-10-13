@@ -136,7 +136,7 @@ Game.prototype.setActivePlayer = function(index) {
 Game.prototype.moveActivePlayer = function(x, y) {
   var player = this.activePlayer;
 
-  this.movePlayerTo(player, player.x + x, player.y + y);
+  this.movePlayerBy(player, x, y);
 };
 
 /**
@@ -147,7 +147,7 @@ Game.prototype.moveActivePlayer = function(x, y) {
  * @param {Number} x How many tiles horizontally (-1 move left, 1 move right).
  * @param {Number} y How many tiles vertically (-1 move up, 1 move down).
  */
-Game.prototype.movePlayer = function(player, x, y) {
+Game.prototype.movePlayerBy = function(player, x, y) {
   this.movePlayerTo(player, player.x + x, player.y + y);
 };
 
