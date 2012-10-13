@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+ <html>
+  <head>
+    <title>Some people</title>
+    <meta charset="utf-8">
+    <link href="http://fonts.googleapis.com/css?family=Cousine&subset=latin" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="game.css">
+  </head>
+  <body>
+    <audio id="step-sound" src="sounds/step.ogg">
+      Your browser does not support the <code>audio</code> element.
+    </audio>
+    <audio id="nom-sound" src="sounds/sd_0.ogg">
+      Your browser does not support the <code>audio</code> element.
+    </audio>
+    <div id="gameboard">
+      <ul id="players">
+      </ul>
+    </div>
+    <script src="game.js"></script>
+    <script>
+      (function() {
+
+        var stepSound = document.querySelector('#step-sound');
+        var nomSound = document.querySelector('#nom-sound');
+
+        var game;
+        
+        game = new Game(document.querySelector('#gameboard'), { tilesize: 50, goodieSound: nomSound });
+        
+        game.createBoard(15, 10);
+
+        game.addGoodies(20, { type: 'greens', energy: 40 });
+        game.addGoodies(10, { type: 'tomatoes', energy: 60 });
+        game.addGoodies(5, { type: 'fish', energy: 80 });
+
+        game.addPlayer('Charming', 'prince');
+        game.addPlayer('Tuck','monk');
+
+        game.setActivePlayer(0);
+
+        document.body.addEventListener('keydown', movePlayer, false);
+        document.body.addEventListener('keydown', switchPlayer, false);
+
+        function switchPlayer(ev) {
+          if (ev.which === 9) {
+            var currentPlayerIndex = game.players.indexOf(game.activePlayer);
+            var newIndex;
+
+            if (game.players[currentPlayerIndex + 1]) {
+              newIndex = currentPlayerIndex + 1;
+            } else {
+              newIndex = 0
+            }
+
+            game.setActivePlayer(newIndex);
+
+            ev.preventDefault();
+          }
+        }
+
+        function movePlayer(ev) {
+          var move = true, x, y;
+
+          setTimeout(function(){
+            stepSound.pause();
+            stepSound.currentTime = 0;
+          }, 300)
+          
+          switch (ev.which) {
+            case 32: // space
+              break;
+            
+            case 39: // right
+              game.moveRight();
+              break;
+            
+            case 37: // left
+              game.moveLeft();
+              break;
+            
+            case 38: // up
+              game.moveUp();
+              break;
+            
+            case 40: // down
+              game.moveDown();
+              break;
+            
+            default:
+              move = false;
+              break;
+          }
+          
+          if (move) {
+            stepSound.play();            
+            ev.preventDefault();
+          }
+          
+        }
+      })();
+    </script>
+  </body>
+</html>
